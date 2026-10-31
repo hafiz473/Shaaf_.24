@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Shaaf Ahmed | Portfolio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+<style>
+:root {
+    --bg-dark: #030712;
+    --card-bg: rgba(17, 24, 39, 0.75);
+    --card-border: rgba(255, 255, 255, 0.1);
+    --accent-blue: #3b82f6;
+    --accent-cyan: #06b6d4;
+    --accent-purple: #a855f7;
+    --accent-green: #10b981;
+    --text-main: #f9fafb;
+    --text-sub: #9ca3af;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+}
+
+body {
+    background-color: var(--bg-dark);
+    color: var(--text-main);
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px 10px;
+    position: relative;
+    overflow-x: hidden;
+}
+
+/* Glowing Background Spheres */
+.glow-1, .glow-2 {
+    position: fixed;
+    width: 350px;
+    height: 350px;
+    border-radius: 50%;
+    filter: blur(140px);
+    z-index: 0;
+    pointer-events: none;
+    opacity: 0.4;
+}
+.glow-1 { top: -50px; left: -50px; background: var(--accent-blue); }
+.glow-2 { bottom: -50px; right: -50px; background: var(--accent-purple); }
+
+/* Main Single Frame Container */
+.main-frame {
+    width: min(100%, 780px);
+    background: var(--card-bg);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid var(--card-border);
+    border-radius: 28px;
+    padding: 35px 25px;
+    position: relative;
+    z-index: 10;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.7);
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+/* Header Section */
+.profile-header {
+    text-align: center;
+    position: relative;
+}
+
+.welcome-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 6px 16px;
+    background: rgba(59, 130, 246, 0.15);
+    border: 1px solid rgba(59, 130, 246, 0.3);
+    border-radius: 50px;
+    color: var(--accent-cyan);
+    font-size: 13px;
+    font-weight: 600;
+    margin-bottom: 12px;
+}
+
+.title {
+    font-family: 'Outfit', sans-serif;
+    font-size: clamp(32px, 6vw, 46px);
+    font-weight: 800;
+    background: linear-gradient(135deg, #ffffff 30%, var(--accent-cyan) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    letter-spacing: -0.5px;
+}
+
+.subtitle {
+    color: var(--text-sub);
+    font-size: 15px;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    margin-top: 4px;
+}
+
+/* Dashboard Layout Grid */
+.dashboard-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+}
+
+@media (max-width: 640px) {
+    .dashboard-grid { grid-template-columns: 1fr; }
+}
+
+.card-box {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid var(--card-border);
+    border-radius: 20px;
+    padding: 20px;
+    transition: all 0.3s ease;
+}
+
+.card-box:hover {
+    border-color: rgba(59, 130, 246, 0.4);
+    background: rgba(255, 255, 255, 0.05);
+    transform: translateY(-2px);
+}
+
+.card-title {
+    font-family: 'Outfit', sans-serif;
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--accent-cyan);
+    margin-bottom: 14px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+/* Info Rows */
+.info-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 12px;
+}
+.info-row:last-child { margin-bottom: 0; }
+
+.info-icon {
+    width: 36px;
+    height: 36px;
+    border-radius: 10px;
+    background: rgba(59, 130, 246, 0.15);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--accent-blue);
+    font-size: 15px;
+}
+
+.info-text .lbl { font-size: 11px; color: var(--text-sub); text-transform: uppercase; font-weight: 600; }
+.info-text .val { font-size: 14px; font-weight: 700; color: #fff; }
+
+/* Academic Highlight */
+.marks-chip {
+    background: rgba(16, 185, 129, 0.15);
+    border: 1px solid rgba(16, 185, 129, 0.3);
+    color: var(--accent-green);
+    padding: 3px 10px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 700;
+    margin-left: auto;
+}
+
+/* Social Grid Links */
+.social-links-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+}
+
+@media (max-width: 500px) {
+    .social-links-grid { grid-template-columns: 1fr; }
+}
+
+.social-btn {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 12px 14px;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid var(--card-border);
+    border-radius: 14px;
+    color: var(--text-main);
+    text-decoration: none;
+    font-size: 13px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.social-btn:hover {
+    background: rgba(255, 255, 255, 0.08);
+    transform: translateY(-2px);
+}
+
+.social-btn i { font-size: 16px; width: 20px; text-align: center; }
+
+.btn-wa { background: linear-gradient(135deg, #25d366, #128c7e); border: none; grid-column: span 2; }
+@media (max-width: 500px) { .btn-wa { grid-column: span 1; } }
+
+footer {
+    text-align: center;
+    font-size: 12px;
+    color: var(--text-sub);
+    padding-top: 10px;
+}
+</style>
+</head>
+<body>
+
+<div class="glow-1"></div>
+<div class="glow-2"></div>
+
+<div class="main-frame">
+
+    <!-- Header Section -->
+    <div class="profile-header">
+        <div class="welcome-badge">
+            <i class="fa-solid fa-sparkles"></i> Welcome to my official website
+        </div>
+        <h1 class="title">Shaaf Ahmed</h1>
+        <div class="subtitle">
+            <i class="fa-solid fa-book-quran" style="color: var(--accent-cyan);"></i> Hafiz-e-Quran &nbsp;•&nbsp; ICS Student
+        </div>
+    </div>
+
+    <!-- Dashboard Grid Frame -->
+    <div class="dashboard-grid">
+        
+        <!-- Personal Info Card -->
+        <div class="card-box">
+            <div class="card-title">
+                <i class="fa-solid fa-user-gear"></i> Personal Details
+            </div>
+            
+            <div class="info-row">
+                <div class="info-icon"><i class="fa-solid fa-mosque"></i></div>
+                <div class="info-text">
+                    <div class="lbl">Religion</div>
+                    <div class="val">Islam (Muslim)</div>
+                </div>
+            </div>
+
+            <div class="info-row">
+                <div class="info-icon"><i class="fa-solid fa-location-dot"></i></div>
+                <div class="info-text">
+                    <div class="lbl">Location</div>
+                    <div class="val">Daultala</div>
+                </div>
+            </div>
+
+            <div class="info-row">
+                <div class="info-icon"><i class="fa-solid fa-baseball-bat-ball"></i></div>
+                <div class="info-text">
+                    <div class="lbl">Fav Sport</div>
+                    <div class="val">Cricket</div>
+                </div>
+            </div>
+
+            <div class="info-row">
+                <div class="info-icon"><i class="fa-solid fa-users"></i></div>
+                <div class="info-text">
+                    <div class="lbl">Family</div>
+                    <div class="val">Parents, 2 Bros & 1 Sis</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Academic Details Card -->
+        <div class="card-box">
+            <div class="card-title">
+                <i class="fa-solid fa-graduation-cap"></i> Academic Background
+            </div>
+
+            <div class="info-row">
+                <div class="info-icon"><i class="fa-solid fa-school"></i></div>
+                <div class="info-text">
+                    <div class="lbl">Matric (Computer Science)</div>
+                    <div class="val">Dar-e-Arqam School</div>
+                </div>
+                <div class="marks-chip">1118/1200</div>
+            </div>
+
+            <div class="info-row" style="margin-top: 15px;">
+                <div class="info-icon"><i class="fa-solid fa-building-columns"></i></div>
+                <div class="info-text">
+                    <div class="lbl">Intermediate (1st Year)</div>
+                    <div class="val">Wings Group of Colleges</div>
+                </div>
+            </div>
+
+            <div class="info-row">
+                <div class="info-icon"><i class="fa-solid fa-laptop-code"></i></div>
+                <div class="info-text">
+                    <div class="lbl">Field of Study</div>
+                    <div class="val">ICS (Computer Science)</div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Connect With Me Links -->
+    <div class="card-box">
+        <div class="card-title">
+            <i class="fa-solid fa-paper-plane"></i> Connect With Me
+        </div>
+        
+        <div class="social-links-grid">
+            <a href="https://www.instagram.com/shaaf___24" target="_blank" class="social-btn">
+                <i class="fa-brands fa-instagram" style="color: #e1306c;"></i> Instagram (@shaaf___24)
+            </a>
+            <a href="https://www.snapchat.com/add/shaaf_2411" target="_blank" class="social-btn">
+                <i class="fa-brands fa-snapchat" style="color: #fffc00;"></i> Snapchat (shaaf_2411)
+            </a>
+            <a href="https://www.tiktok.com/@shaaf_.24" target="_blank" class="social-btn">
+                <i class="fa-brands fa-tiktok" style="color: #25f4ee;"></i> TikTok (@shaaf_.24)
+            </a>
+            <a href="https://facebook.com" target="_blank" class="social-btn">
+                <i class="fa-brands fa-facebook" style="color: #1877f2;"></i> Facebook (Shaaf Ahmed)
+            </a>
+            <a href="https://www.threads.net/@shaaf_.24" target="_blank" class="social-btn">
+                <i class="fa-brands fa-threads" style="color: #ffffff;"></i> Threads (@shaaf_.24)
+            </a>
+            <a href="https://discord.com" target="_blank" class="social-btn">
+                <i class="fa-brands fa-discord" style="color: #5865f2;"></i> Discord (shaafahmed)
+            </a>
+            <a href="mailto:hafizshaafahmed@gmail.com" class="social-btn" style="grid-column: span 2;">
+                <i class="fa-solid fa-envelope" style="color: #ea4335;"></i> Email: hafizshaafahmed@gmail.com
+            </a>
+            <a href="https://wa.me/923476524007" target="_blank" class="social-btn btn-wa">
+                <i class="fa-brands fa-whatsapp"></i> WhatsApp: 03476524007
+            </a>
+        </div>
+    </div>
+
+    <footer>
+        © 2026 Shaaf Ahmed • Designed with Glassmorphism
+    </footer>
+
+</div>
+
+</body>
+      </html>
+      
